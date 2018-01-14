@@ -1,3 +1,10 @@
+Miguel's Readable App
+
+This is my project submission for the React Nanodegree module 2: React+Redux
+
+Below you will find instructions for installing and running the project.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>

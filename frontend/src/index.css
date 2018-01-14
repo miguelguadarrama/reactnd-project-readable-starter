@@ -1,5 +1,169 @@
+.sidebar {
+  border-right: 1px solid #DDD;
+}
+
 body {
+  background: #F7F7F7;
+}
+
+header {
+  border-bottom: 2px solid #18405a;
+  margin: 0 0 15px 0;
+  background: rgb(68, 108, 141);
+  color: #FFF;
+  overflow: hidden;
+  padding: 0 15px;
+}
+
+span.category-link {
+  border: 1px solid #DDD;
+  background: #f5f5f5;
+  padding: 0 2px;
+  border-radius: 2px;
+  text-decoration: none;
+  color: #555;
+  font-size: x-small;
+}
+
+ul.list {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+}
+
+ul.list li {
+  display: block;
+  list-style: none;
+  overflow: hidden;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.posts {
+  background: #FFF;
+  padding: 15px;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+}
+
+.posts .score {
+  float: left;
+  margin-right: 10px;
+  width: 50px;
+  padding: 2px;
+  text-align: center;
+  border: 1px solid #DDD;
+  font-size: 14px;
+}
+
+.navbar {
+  width: 100%;
+  background: #18405a;
+  border-radius: 0;
+  min-height: 0;
+  margin: 0;
+  border: 0;
+}
+
+.navbar ul {
+  line-height: 10px;
+}
+
+.navbar ul li {
+  display: inline-block;
+  list-style: none;
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: #FFF;
+  padding: 5px 2px;
+}
+
+.navbar ul a {
+  color: inherit;
+}
+
+.navbar ul li:first-child {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.navbar ul li:after {
+  content: ' -'
+}
+
+.navbar ul li:last-child:after, .navbar ul li:first-child:after {
+  content: '';
+}
+
+.media-heading {
+  margin: 0;
+}
+
+.media-left {
+  text-align: center;
+  color: #666;
+}
+
+.media-left div {
+  width: 32px;
+}
+
+.media-left a {
+  color: inherit;
+}
+
+.media-content {
+  margin-top: 5px;
+  border-top: 1px solid #EEE;
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+
+.options {
+  font-size: small;
+}
+
+.options a{
+  color: inherit;
+}
+
+.options span, .options a, .options button {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.options ul {
+  margin: 0;
+  display:inline-block;
+}
+
+.options ul a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.options ul li a.active {
+  font-weight: bold;
+}
+
+ul.post-options li {
+  list-style: none;
+  display: inline-block;
+  font-size: small;
+  margin-right: 8px;
+  color:#999;
+}
+
+ul.post-options a{
+  color: inherit;
+}
+
+.button-link, .button-link:active, .button-link:focus{
+  border:0;
+  box-shadow: none;
+  display: inline;
+  padding: 0;
+  outline: 0px;
+  background: none;
 }
