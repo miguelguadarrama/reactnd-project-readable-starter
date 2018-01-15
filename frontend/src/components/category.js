@@ -38,7 +38,7 @@ class Category extends Component {
 
 const mapStateToProps = ({ postData, categories }) => {
     return {
-        posts: postData.posts,
+        posts: postData.posts.filter(f => f.deleted === false),
         sortBy: postData.sortBy,
         categories: categories.categories
     }

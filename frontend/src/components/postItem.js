@@ -5,11 +5,16 @@ import Score from './score'
 import { Vote } from '../actions'
 import { connect } from 'react-redux'
 import * as Api from '../utils/api'
+import { DeletePostAction } from '../actions'
 
 class PostItem extends Component {
     submitPostVote = (id, value) => {
         Api.submitVote(id, value)
         this.props.submitVote(id, value);
+    }
+    delete = (id) => {
+        this.props.deletePost(id)
+        Api.deletePost(id)
     }
     render() {
         const { post } = this.props;
@@ -23,7 +28,7 @@ class PostItem extends Component {
                     <ul className="list post-options">
                         <li><Link to={`/${post.category}/${post.id}`}>{post.commentCount} comments</Link></li>
                         <li><Link to={`/${post.category}/${post.id}/edit`}>edit</Link></li>
-                        <li><button type="button" className="button-link">delete</button></li>
+                        <li><button onClick={() => this.delete(post.id)} type="button" className="button-link">delete</button></li>
                     </ul>
                 </div>
             </li>
@@ -39,7 +44,8 @@ const mapStateToProps = ({ postData }) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        submitVote: (id, value) => dispatch(Vote(id, value))
+        submitVote: (id, value) => dispatch(Vote(id, value)),
+        deletePost: (id) => dispatch(DeletePostAction(id))
     }
 }
 

@@ -14,6 +14,39 @@ const defaultData = {
     deleted: false,
     parentDeleted: false
   },
+  "894tuq4ut84ut8v4t89999g": {
+    id: '894tuq4ut84ut8v4t89999g',
+    parentId: "8xf0y6ziyjabvozdd253nd",
+    parentPostId: "894tuq4ut84ut8v4t8wun89g",
+    timestamp: 1468166872634,
+    body: 'Hi there! I am a NESTED COMMENT! No way!',
+    author: 'thingtwo',
+    voteScore: 100,
+    deleted: false,
+    parentDeleted: false
+  },
+  "894tuq4ut84t99g": {
+    id: '894tuq4ut84t99g',
+    parentId: "8xf0y6ziyjabvozdd253nd",
+    parentPostId: "894tuq4ut84ut8v4t89999g",
+    timestamp: 1468166875634,
+    body: 'Hi there! I am a NESTED NESTED COMMENT! No way!',
+    author: 'thingtwo',
+    voteScore: 500,
+    deleted: false,
+    parentDeleted: false
+  },
+  "894tuq4ut84t91211119g": {
+    id: '894tuq4ut84t91211119g',
+    parentId: "8xf0y6ziyjabvozdd253nd",
+    parentPostId: "894tuq4ut84t99g",
+    timestamp: 1468166875934,
+    body: 'Hi there! I am a NESTED NESTED COMMENT! No way!',
+    author: 'thingtwo',
+    voteScore: 784,
+    deleted: false,
+    parentDeleted: false
+  },
   "8tu4bsun805n8un48ve89": {
     id: '8tu4bsun805n8un48ve89',
     parentId: "8xf0y6ziyjabvozdd253nd",
