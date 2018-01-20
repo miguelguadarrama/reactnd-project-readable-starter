@@ -71,7 +71,7 @@ class EditPost extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        editPost: (post) => dispatch(editPost(post))
+        editPost: (post) => editPost(post)(dispatch)
     }
 }
 

@@ -17,11 +17,11 @@ const logger = store => next => action => {
         console.group(action.type);
         console.log("dispatching", action);
         console.groupEnd(action.type);
-    }
+    }else console.log(action)
     
     let result = next(action)
-    console.log("store after");
-    console.log(store.getState())
+    //console.log("store after");
+    //console.log(store.getState())
     return result
 }
 

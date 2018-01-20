@@ -40,8 +40,8 @@ const mapStateToProps = ({ posts }) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        submitVote: (id, value) => dispatch(votePost(id, value)),
-        deletePost: (id) => dispatch(deletePost(id))
+        submitVote: (id, value) => votePost(id, value)(dispatch),
+        deletePost: (id) => deletePost(id)(dispatch)
     }
 }
 

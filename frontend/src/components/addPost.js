@@ -101,7 +101,7 @@ const mapStateToProps = ({ categories }) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        submitPost: (post) => dispatch(addPost(post))
+        submitPost: (post) => addPost(post)(dispatch)
     }
 }
 

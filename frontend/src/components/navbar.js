@@ -34,7 +34,7 @@ const mapStateToProps = ({ categories }) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getCategories: () => dispatch(fetchCategories())
+        getCategories: () => fetchCategories()(dispatch)
     }
 }
 

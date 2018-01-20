@@ -74,7 +74,7 @@ class AddCommentComponent extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addComment: (comment) => dispatch(addComment(comment))
+        addComment: (comment) => addComment(comment)(dispatch)
     }
 }
 

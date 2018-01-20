@@ -35,7 +35,6 @@ class Comment extends Component {
         return this.props.deleteComment(id, this.props.comment.parentId);
     }
     onSubmitPostVote = (id, value) => {
-        console.log(id, value)
         this.props.submitVote(id, value)
     }
     replyComment = (e, comment) => {
@@ -104,9 +103,9 @@ const mapStateToProps = ({ comments }) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        editComment: (comment) => dispatch(editComment(comment)),
-        submitVote: (id, value) => dispatch(voteComment(id, value)),
-        deleteComment: (id, parentId) => dispatch(deleteComment(id, parentId))
+        editComment: (comment) => editComment(comment)(dispatch),
+        submitVote: (id, value) => voteComment(id, value)(dispatch),
+        deleteComment: (id, parentId) => deleteComment(id, parentId)(dispatch)
     }
 }
 

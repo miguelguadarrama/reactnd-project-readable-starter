@@ -43,7 +43,7 @@ const mapStateToProps = ({ comments }) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchComments: id => dispatch(fetchComments(id))
+        fetchComments: id => fetchComments(id)(dispatch)
     }
 }
 
