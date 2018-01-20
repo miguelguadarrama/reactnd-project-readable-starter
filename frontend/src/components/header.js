@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { SortBy } from '../actions'
+import { SortBy } from '../actions/post'
 
 class Header extends Component {
     render() {
@@ -22,9 +22,9 @@ class Header extends Component {
     }
 }
 
-const mapStateToProps = ({ postData }) => {
+const mapStateToProps = ({ posts }) => {
     return {
-        sortBy: postData.sortBy
+        sortBy: posts.sortBy
     }
 }
 

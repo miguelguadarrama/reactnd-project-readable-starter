@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import Header from './header'
+import { getPost } from '../utils/api'
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import * as Api from '../utils/api'
-import { EditPostAction } from '../actions'
+import { editPost } from '../actions/post'
 
 class EditPost extends Component {
     state = {
@@ -12,10 +12,10 @@ class EditPost extends Component {
     }
     componentDidMount() {
         const id = this.props.match.params.id;
-        Api.getPost(id)
+        getPost(id)
             .then(data => {
                 this.setState({ post: data })
-            }).catch(() => this.setState({ post: {} }))
+            })
     }
     onInputChange(input, event) {
         const obj = this.state.post;
@@ -30,9 +30,7 @@ class EditPost extends Component {
             title: post.title,
             body: post.body
         });
-        Api.editPost(post).then(data => {
-            this.setState({ done: true })
-        })
+        this.setState({ done: true })
     }
     render() {
         const { post, done } = this.state;
@@ -71,18 +69,13 @@ class EditPost extends Component {
     }
 }
 
-const mapStateToProps = () => {
-    return {
-    }
-}
-
 const mapDispatchToProps = (dispatch) => {
     return {
-        editPost: (post) => EditPostAction(post)
+        editPost: (post) => dispatch(editPost(post))
     }
 }
 
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(EditPost)

@@ -97,6 +97,7 @@ function add (token, comment) {
       body: comment.body,
       author: comment.author,
       parentId: comment.parentId,
+      parentPostId: comment.parentPostId,
       voteScore: 1,
       deleted: false,
       parentDeleted: false

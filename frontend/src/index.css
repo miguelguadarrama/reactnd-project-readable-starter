@@ -171,3 +171,7 @@ ul.post-options a{
 .metadata{
   color:#999;
 }
+
+a{
+  cursor: pointer;
+}

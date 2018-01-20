@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import Header from './header'
 import { connect } from 'react-redux'
-import { AddPost } from '../actions'
-import * as Api from '../utils/api'
+import { addPost } from '../actions/post'
 import pushid from 'pushid'
 
 class AddPostComponent extends Component {
@@ -21,7 +20,7 @@ class AddPostComponent extends Component {
     }
     submit = () => {
         const { title, body, category, author } = this.state; 
-        Api.addPost({
+        const post = {
             id: pushid(),
             title,
             body,
@@ -30,11 +29,9 @@ class AddPostComponent extends Component {
             timestamp: Date.now(),
             voteScore: 0,
             deleted: false
-        }).catch(err => console.error(err))
-            .then(data => {
-                this.props.submitPost(data);
-                this.setState({ done: true })
-            })
+        };
+        this.props.submitPost(post);
+        this.setState({done: true})
         //this.props.submitPost(title, body, category, author);
     }
     render() {
@@ -104,7 +101,7 @@ const mapStateToProps = ({ categories }) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        submitPost: (post) => dispatch(AddPost(post))
+        submitPost: (post) => dispatch(addPost(post))
     }
 }
 

@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux'
-import { ADD_COMMENT, SET_CATEGORIES, SET_POSTS, SORT_BY, VOTE, ADD_POST, SET_COMMENTS, EDIT_POST, EDIT_COMMENT, REMOVE_POST, REMOVE_COMMENT, VOTE_COMMENT } from '../actions'
+import { SET_POSTS, SET_POST, SORT_BY, VOTE, ADD_POST, EDIT_POST, REMOVE_POST, UPDATE_POST_COMMENT_COUNT } from '../actions/post'
+import { ADD_COMMENT, SET_COMMENTS, EDIT_COMMENT, REMOVE_COMMENT, VOTE_COMMENT } from '../actions/comment'
+import { SET_CATEGORIES } from '../actions/categories'
 
 const postsInitialState = {
     posts: [],
+    categories: [],
     sortBy: 'date'
 }
 
@@ -10,11 +13,7 @@ const commentsInitialState = {
     comments: []
 }
 
-const categoriesInitialState = {
-    categories: []
-}
-
-const commentData = (state = commentsInitialState, action) => {
+const comments = (state = commentsInitialState, action) => {
     switch (action.type) {
         case SET_COMMENTS:
             return {
@@ -27,9 +26,17 @@ const commentData = (state = commentsInitialState, action) => {
                 comments: state.comments.concat(action.comment)
             }
         case REMOVE_COMMENT:
+            /* normally I would do comments.filter() and take out the deleted comment, but I want to replicate
+               reddit's [deleted] behavior here! */
             return {
                 ...state,
-                comments: state.comments.filter(f => f.id !== action.id)
+                comments: state.comments.map(f => {
+                    if(f.id === action.id){
+                        f.body = "[deleted]"
+                        f.deleted = true
+                    }
+                    return f;
+                })
             }
         case VOTE_COMMENT:
             return {
@@ -56,7 +63,7 @@ const commentData = (state = commentsInitialState, action) => {
     }
 }
 
-const postData = (state = postsInitialState, action) => {
+const posts = (state = postsInitialState, action) => {
     switch (action.type) {
         case ADD_POST:
             return {
@@ -84,17 +91,28 @@ const postData = (state = postsInitialState, action) => {
             }
         case EDIT_POST:
             const posts = state.posts.map(p => {
-                if (p.id === action.post.id) {
-                    p.title = action.post.title
-                    p.author = action.post.author
-                    p.category = action.post.category
-                    p.body = action.post.body
+                if (p.id === action.id) {
+                    p.title = action.title
+                    p.author = action.author
+                    p.category = action.category
+                    p.body = action.body
                 }
                 return p
             });
             return {
                 ...state,
                 posts: posts
+            }
+        case SET_POST:
+            const post = action.post;
+            return {
+                ...state,
+                posts: state.posts.length && state.posts.filter(p => p.id === action.post.id) ? state.posts.map(p => {
+                    if(p.id === action.post.id){
+                        p = action.post
+                    }
+                    return p
+                }) : state.posts.concat(post)
             }
         case SET_POSTS:
             return {
@@ -105,6 +123,16 @@ const postData = (state = postsInitialState, action) => {
             return {
                 ...state,
                 sortBy: action.sort
+            }
+        case UPDATE_POST_COMMENT_COUNT:
+            return {
+                ...state,
+                posts: state.posts.map(p => {
+                    if(p.id === action.id){
+                        p.commentCount += action.value
+                    }
+                    return p
+                })
             }
         case VOTE:
             return {
@@ -121,7 +149,7 @@ const postData = (state = postsInitialState, action) => {
     }
 }
 
-const categories = (state = categoriesInitialState, action) => {
+const categories = (state = postsInitialState, action) => {
     switch (action.type) {
         case SET_CATEGORIES:
             return {
@@ -134,7 +162,7 @@ const categories = (state = categoriesInitialState, action) => {
 }
 
 export default combineReducers({
-    postData,
+    posts,
     categories,
-    commentData
+    comments
 })

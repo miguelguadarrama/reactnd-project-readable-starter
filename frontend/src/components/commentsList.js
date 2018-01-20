@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import * as Api from '../utils/api'
+//import * as Api from '../utils/api'
 import { connect } from 'react-redux'
-import { SetComments } from '../actions'
+import { fetchComments } from '../actions/comment'
 import Comment from './comment'
 import { sorter } from '../utils/helpers'
 
@@ -11,13 +11,9 @@ class CommentList extends Component {
     }
     componentDidMount() {
         const id = this.props.post.id;
-        Api.getComments(id).then(data => {
-            this.props.setComments(data)
-        })
+        this.props.fetchComments(id)
     }
-    onSubmitPostVote() {
-
-    }
+    
     replyComment = (e) => {
         e.preventDefault();
     }
@@ -26,9 +22,9 @@ class CommentList extends Component {
         return (
             <div className="row">
                 <div className="col-xs-12">
-                    {comments &&  (
+                    {comments && (
                         <div className="posts media-list">
-                            {comments.filter(f => f.parentId === post.id && !f.parentPostId && !f.deleted).map(comment => (
+                            {comments.filter(f => f.parentId === post.id && !f.parentPostId).map(comment => (
                                 <Comment key={comment.id} comment={comment} post={post} />
                             ))}
                         </div>
@@ -39,15 +35,15 @@ class CommentList extends Component {
     }
 }
 
-const mapStateToProps = ({ commentData }) => {
+const mapStateToProps = ({ comments }) => {
     return {
-        comments: commentData.comments.sort(sorter('date'))
+        comments: comments.comments.sort(sorter('date'))
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setComments: (comments) => dispatch(SetComments(comments))
+        fetchComments: id => dispatch(fetchComments(id))
     }
 }
 

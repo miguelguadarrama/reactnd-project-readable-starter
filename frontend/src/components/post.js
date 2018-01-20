@@ -1,44 +1,42 @@
 import React, { Component } from 'react'
 import Header from './header'
 import { capitalize } from '../utils/helpers'
-import Score from './score'
-import { Link, Redirect } from 'react-router-dom'
-import * as ta from 'time-ago'
-import * as Api from '../utils/api'
-import { Vote } from '../actions'
+import { Redirect } from 'react-router-dom'
+//import * as ta from 'time-ago'
 import { connect } from 'react-redux'
-import AddCommentComponent from './addComment'
 import CommentList from './commentsList'
-import { DeletePostAction } from '../actions'
+//import Score from './score'
+//import AddCommentComponent from './addComment'
+import { deletePost, votePost, fetchPost } from '../actions/post'
+import PostDetails from './postDetails'
 
 class Post extends Component {
     state = {
         loading: true,
-        post: {},
         category: '',
         del: false
     }
     componentDidMount() {
         const id = this.props.match.params.id;
-        const cat = this.props.match.params.category;
-        Api.getPost(id)
+        //const cat = this.props.match.params.category;
+        /*getPost(id)
             .then(data => {
                 this.setState({ post: data, loading: false, category: data.category || cat })
             }).catch(() => this.setState({ post: {}, loading: false, category: cat }))
-
+        */
+        this.props.getPost(id)
     }
     submitPostVote = (id, value) => {
-        Api.submitVote(id, value)
         this.props.submitVote(id, value);
-        this.setState(state => state.post.voteScore += value)
+        //this.setState(state => state.post.voteScore += value)
     }
     delete = (id) => {
         this.props.deletePost(id);
-        this.setState({del: true})
-        Api.deletePost(id)
+        this.setState({ del: true })
     }
     render() {
-        const { post, loading, category, del } = this.state;
+        const { loading, category, del } = this.state;
+        const { post } = this.props;
         return del ? <Redirect to={`/${post.category}`} /> : (post && post.id ? (
             <div>
                 <div className="row">
@@ -53,19 +51,20 @@ class Post extends Component {
             (<Redirect to={`/${category}`} />) : '')
         )
     }
-    
+
 }
 
-const mapStateToProps = ({ postData }) => {
+const mapStateToProps = ({ posts }, ownProps) => {
     return {
-        posts: postData.posts
+        post: posts.posts.filter(p => p.id === ownProps.match.params.id)[0]
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        submitVote: (id, value) => dispatch(Vote(id, value)),
-        deletePost: (id) => dispatch(DeletePostAction(id))
+        getPost: (id) => dispatch(fetchPost(id)),
+        submitVote: (id, value) => dispatch(votePost(id, value)),
+        deletePost: (id) => dispatch(deletePost(id))
     }
 }
 
@@ -74,7 +73,7 @@ export default connect(
     mapDispatchToProps
 )(Post)
 
-const PostDetails = (props) => {
+/*const PostDetails = (props) => {
     const { post, onSubmitPostVote } = props;
     return (
         <div className="media-list posts">
@@ -97,4 +96,4 @@ const PostDetails = (props) => {
             <AddCommentComponent post={post} />
         </div>
     )
-}
+}*/

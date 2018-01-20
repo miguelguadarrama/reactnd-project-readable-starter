@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as Api from '../utils/api'
-import { SetCategories } from '../actions'
+//import * as Api from '../utils/api'
+import { fetchCategories } from '../actions/categories'
 import { Link } from 'react-router-dom'
 
 class Navbar extends Component {
     componentDidMount() {
-        Api.getCategories()
-            .then(data => this.props.setCategories(data))
+        this.props.getCategories()
     }
     render() {
         const { categories, current } = this.props;
@@ -35,7 +34,7 @@ const mapStateToProps = ({ categories }) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setCategories: (data) => dispatch(SetCategories(data))
+        getCategories: () => dispatch(fetchCategories())
     }
 }
 

@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import pushid from 'pushid'
-import { AddCommentAction } from '../actions'
+import { addComment } from '../actions/comment'
 import { connect } from 'react-redux'
-import * as Api from '../utils/api'
 
 class AddCommentComponent extends Component {
     state = {
         collapsed: true,
-        body: ''
+        body: '',
+        author: ''
     }
     collapse = () => {
         this.setState(state => ({
@@ -39,7 +39,6 @@ class AddCommentComponent extends Component {
             parentDeleted: false
         }
         this.props.addComment(comment);
-        Api.addComment(comment)
         this.collapse()
     }
     render() {
@@ -73,19 +72,13 @@ class AddCommentComponent extends Component {
     }
 }
 
-const mapStateToProps = ( ) => {
-    return {
-
-    }
-}
-
 const mapDispatchToProps = (dispatch) => {
     return {
-        addComment: (comment) => dispatch(AddCommentAction(comment))
+        addComment: (comment) => dispatch(addComment(comment))
     }
 }
 
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(AddCommentComponent)

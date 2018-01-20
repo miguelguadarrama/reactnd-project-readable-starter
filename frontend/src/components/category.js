@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as Api from '../utils/api'
-import { SetPosts } from '../actions'
+import { fetchPosts } from '../actions/post'
 import Header from './header'
 import PostList from './postList'
 import { sorter, capitalize } from '../utils/helpers'
@@ -9,8 +8,7 @@ import { Link } from 'react-router-dom'
 
 class Category extends Component {
     componentDidMount() {
-        Api.getPosts()
-            .then(data => this.props.setPosts(data))
+       this.props.fetchPosts()
     }
     render() {
         const current = this.props.match && this.props.match.params.category ? this.props.match.params.category : '';
@@ -36,17 +34,17 @@ class Category extends Component {
     }
 }
 
-const mapStateToProps = ({ postData, categories }) => {
+const mapStateToProps = ({ posts, categories }) => {
     return {
-        posts: postData.posts.filter(f => f.deleted === false),
-        sortBy: postData.sortBy,
+        posts: posts.posts.filter(f => f.deleted === false),
+        sortBy: posts.sortBy,
         categories: categories.categories
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setPosts: (data) => dispatch(SetPosts(data))
+        fetchPosts: () => dispatch(fetchPosts())
     }
 }
 
