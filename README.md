@@ -13,3 +13,18 @@ Below you will find instructions for installing and running the project.
 3. In line with previous list item, I made it so deleted comments don't count to the post's commentCount. So a deleted comment will be shown as "[deleted]" but will also trigger a re-count of post's commentCount. Also, deleted comments won't allow to vote on them or reply them.
 
 
+## Installing
+
+### API Server
+
+To install and start the API server, run the following commands in this directory:
+
+* `npm install`
+* `node server`
+
+### Frontend
+
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+
+* `npm install`
+* `npm start`
