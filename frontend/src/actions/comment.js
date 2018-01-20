@@ -54,7 +54,8 @@ export const addComment = (comment) => dispatch => (
 
 export const editComment = (comment) => dispatch => (
     Api.editComment(comment)
-        .then(data => { dispatch(EditCommentAction(data)); dispatch() })
+        .then(data => { console.warn(comment); dispatch(EditCommentAction(data))})
+        .catch(err => console.warn(comment, err))
 )
 
 export const deleteComment = (id, parentId) => dispatch => (

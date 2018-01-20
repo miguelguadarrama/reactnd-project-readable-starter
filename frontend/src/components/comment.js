@@ -27,7 +27,7 @@ class Comment extends Component {
         this.editThisComment(obj)
     }
     editThisComment = (comment) => {
-        this.props.editThisComment(comment.id, comment.body, comment.timestamp)
+        this.props.editComment(comment)
         this.toggleEdit();
     }
     deleteThisComment = (e, id) => {
@@ -79,7 +79,16 @@ class Comment extends Component {
                         <AddReplyComponent onReply={this.onReply} comment={comment} />
                     )}
                     {comments && comments.filter(f => f.parentPostId === comment.id).map(c => (
-                        <Comment deleteComment={this.props.deleteComment} deleteThisComment={this.deleteThisComment} submitVote={this.props.submitVote} onSubmitVote={this.onSubmitPostVote} editThisComment={this.editThisComment} key={c.id} post={c} comment={c} comments={comments} />
+                        <Comment 
+                            deleteComment={this.props.deleteComment} 
+                            deleteThisComment={this.deleteThisComment} 
+                            editComment={this.props.editComment}
+                            submitVote={this.props.submitVote} 
+                            onSubmitVote={this.onSubmitPostVote} 
+                            editThisComment={this.editThisComment} 
+                            key={c.id} post={c} 
+                            comment={c} 
+                            comments={comments} />
                     ))}
                 </div>
             </div>
@@ -95,7 +104,7 @@ const mapStateToProps = ({ comments }) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        editThisComment: (id, body, timestamp) => dispatch(editComment({ id, body, timestamp })),
+        editComment: (comment) => dispatch(editComment(comment)),
         submitVote: (id, value) => dispatch(voteComment(id, value)),
         deleteComment: (id, parentId) => dispatch(deleteComment(id, parentId))
     }
