@@ -13,15 +13,12 @@ import registerServiceWorker from './registerServiceWorker';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const logger = store => next => action => {
-    if(action.type){
-        console.group(action.type);
-        console.log("dispatching", action);
-        console.groupEnd(action.type);
-    }else console.log(action)
-    
+    console.group(action.type);
+    console.log("dispatching", action);
     let result = next(action)
     //console.log("store after");
     //console.log(store.getState())
+    console.groupEnd(action.type);
     return result
 }
 
@@ -39,5 +36,5 @@ ReactDOM.render(
         </Provider>
     </BrowserRouter>
     , document.getElementById('root'));
-    
+
 registerServiceWorker();

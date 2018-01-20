@@ -109,6 +109,7 @@ const posts = (state = postsInitialState, action) => {
                 ...state,
                 posts: state.posts.length && state.posts.filter(p => p.id === action.post.id) ? state.posts.map(p => {
                     if(p.id === action.post.id){
+                        //update post from api
                         p = action.post
                     }
                     return p

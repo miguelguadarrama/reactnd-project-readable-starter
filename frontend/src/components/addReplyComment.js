@@ -40,7 +40,7 @@ class AddReplyComponent extends Component {
                     <div className="form-group">
                         <input type="text" value={author} onChange={this.onSetAuthor} className="form-control" placeholder="Your name" />
                     </div>
-                    <button onClick={this.submit} type="button" className="btn btn-sm btn-primary">Add Reply</button>
+                    <button disabled={!body.length || !author.length} onClick={this.submit} type="button" className="btn btn-sm btn-primary">Add Reply</button>
                     {' '}
                     <button onClick={this.props.onReply} type="button" className="btn btn-sm btn-default">Cancel</button>
                 </div>
