@@ -56,6 +56,27 @@ const defaultData = {
     voteScore: -5,
     deleted: false,
     parentDeleted: false
+  },
+  "-1": {
+    id: '-1',
+    parentId: "1",
+    timestamp: 1516456121670,
+    body: 'This is a normal comment',
+    author: 'Steve Work',
+    voteScore: 50,
+    deleted: false,
+    parentDeleted: false
+  },
+  "-2": {
+    id: '-2',
+    parentId: "1",
+    parentPostId: "-1",
+    timestamp: 1516456141670,
+    body: 'This is a reply comment! Yes!!',
+    author: 'Billy Gates',
+    voteScore: 150,
+    deleted: false,
+    parentDeleted: false
   }
 }
 

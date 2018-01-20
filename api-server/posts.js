@@ -24,6 +24,17 @@ const defaultData = {
     voteScore: -5,
     deleted: false,
     commentCount: 0
+  },
+  "1": {
+    id: '1',
+    timestamp: 1516456121670,
+    title: 'Hello reviewer!',
+    body: 'Thanks for reviewing this. Please check out the threaded comments.',
+    author: 'miguelguadarrama',
+    category: 'udacity',
+    voteScore: 1337,
+    deleted: false,
+    commentCount: 2
   }
 }
 
