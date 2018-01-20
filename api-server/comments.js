@@ -71,7 +71,7 @@ function getByParent (token, parentId) {
   return new Promise((res) => {
     let comments = getData(token)
     let keys = Object.keys(comments)
-    filtered_keys = keys.filter(key => comments[key].parentId === parentId && !comments[key].deleted)
+    filtered_keys = keys.filter(key => comments[key].parentId === parentId)// && !comments[key].deleted
     res(filtered_keys.map(key => comments[key]))
   })
 }
@@ -81,7 +81,7 @@ function get (token, id) {
     const comments = getData(token)
     res(
       comments[id].deleted || comments[id].parentDeleted
-        ? {}
+        ? comments[id]//{}
         : comments[id]
       )
   })
@@ -139,6 +139,7 @@ function disable (token, id) {
     return new Promise((res) => {
       let comments = getData(token)
       comments[id].deleted = true
+      comments[id].body = "[deleted]"
       posts.incrementCommentCounter(token, comments[id].parentId, -1)
       res(comments[id])
     })
