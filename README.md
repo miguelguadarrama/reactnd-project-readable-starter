@@ -1,22 +1,15 @@
-# Readable API Server
+# Miguel's Readable app
 
-This is the starter project for the final assessment project for Udacity's Redux course where you will build a content and comment web app. Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.
+This is my project submission for the React Nanodegree module 2: React+Redux
 
-This repository includes the code for the backend API Server that you'll use to develop and interact with the front-end portion of the project.
+Below you will find instructions for installing and running the project.
 
-## Start Developing
+> Note: I wanted to extend functionality just a bit, more on that below.
 
-To get started developing right away:
+## Changes to the original project
 
-* Install and start the API server
-    - `cd api-server`
-    - `npm install`
-    - `node server`
-* In another terminal window, use Create React App to scaffold out the front-end
-    - `create-react-app frontend`
-    - `cd frontend`
-    - `npm start`
+1. You can reply to comments, and they will be shown nested below its parent's comment.
+2. Instead of removing comments (e.g disappearing), when you delete a comment it will change its body to [deleted] to mimic reddit's behavior somewhat. The property "deleted" will still be set to true, but I don't filter them out of the comment thread, instead just modify their body to show "[deleted]" replacing the old comment. Of course, in real life the old comment body would not be replaced for auditing purposes. The reason for this [deleted] behavior is mostly because I implemented threaded comments, so deleting a parent comment would also make all child comments disappear. I hope this is ok for this project.
+3. In line with previous list item, I made it so deleted comments don't count to the post's commentCount. So a deleted comment will be shown as "[deleted]" but will also trigger a re-count of post's commentCount. Also, deleted comments won't allow to vote on them or reply them.
 
-## API Server
 
-Information about the API server and how to use it can be found in its [README file](api-server/README.md).
