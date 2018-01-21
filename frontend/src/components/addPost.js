@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 import Header from './header'
 import { connect } from 'react-redux'
 import { addPost } from '../actions/post'
-import pushid from 'pushid'
+import { uuidv4 } from '../utils/helpers'
 
 class AddPostComponent extends Component {
     state = {
@@ -21,7 +21,7 @@ class AddPostComponent extends Component {
     submit = () => {
         const { title, body, category, author } = this.state; 
         const post = {
-            id: pushid(),
+            id: uuidv4(),
             title,
             body,
             category,

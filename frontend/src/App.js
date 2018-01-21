@@ -5,6 +5,7 @@ import EditPost from './components/editPost'
 import { Route, Switch } from 'react-router-dom'
 import Post from './components/post'
 import AddPostComponent from './components/addPost'
+import ErrorPage from './components/errorPage'
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
         <Navbar />
         <div className="container-fluid">
           <Switch>
+            <Route path="/404" component={ErrorPage} />
             <Route exact path="/" component={Category} />
             <Route path="/add" component={AddPostComponent} />
             <Route exact path="/:category" component={Category} />

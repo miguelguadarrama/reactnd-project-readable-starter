@@ -1,6 +1,5 @@
 import { getCategories } from '../utils/api'
-
-export const [ SET_CATEGORIES ] = [ 'SET_CATEGORIES' ]
+import { SET_CATEGORIES } from './actionTypes'
 
 const SetCategoriesAction = (categories) => {
     return {

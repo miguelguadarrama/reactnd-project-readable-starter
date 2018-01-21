@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import pushid from 'pushid'
 import { addComment } from '../actions/comment'
 import { connect } from 'react-redux'
+import { uuidv4 } from '../utils/helpers'
 
 class AddCommentComponent extends Component {
     state = {
@@ -28,7 +28,7 @@ class AddCommentComponent extends Component {
     }
     submit = () =>{
         const comment = {
-            id: pushid(),
+            id: uuidv4(),
             body: this.state.body,
             deleted: 0,
             parentId: this.props.post.id,

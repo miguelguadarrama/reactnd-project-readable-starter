@@ -27,35 +27,37 @@ class Post extends Component {
     }
     render() {
         const { del } = this.state;
-        const { post } = this.props;
-        return del ? <Redirect to="/" /> : (post && post.id && !post.deleted ? (
-            <div>
-                <div className="row">
-                    <Header title={capitalize(post.category)} />
-                    <div className="col-xs-12">
-                        <PostDetails onDelete={this.delete} post={post} onSubmitPostVote={this.submitPostVote} />
+        const { post, isLoading } = this.props;
+        return del ? (<Redirect to="/" />)
+            : (post && post.id && !post.deleted ? (
+                <div>
+                    <div className="row">
+                        <Header title={capitalize(post.category)} />
+                        <div className="col-xs-12">
+                            <PostDetails onDelete={this.delete} post={post} onSubmitPostVote={this.submitPostVote} />
+                        </div>
                     </div>
+                    <CommentList post={post} />
                 </div>
-                <CommentList post={post} />
-            </div>
-        ) : (
-            <Redirect to="/" />
-        ))
+            ) : (!isLoading && <Redirect to="/404" />)
+            )
+
     }
 
 }
 
 const mapStateToProps = ({ posts }, ownProps) => {
     return {
-        post: posts.posts.filter(p => p.id === ownProps.match.params.id)[0]
+        post: posts.posts.filter(p => p.id === ownProps.match.params.id)[0],
+        isLoading: posts.isLoading
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         getPost: (id) => fetchPost(id)(dispatch),
-        submitVote: (id, value) => dispatch(votePost(id, value)),
-        deletePost: (id) => dispatch(deletePost(id))
+        submitVote: (id, value) => votePost(id, value)(dispatch),
+        deletePost: (id) => deletePost(id)(dispatch)
     }
 }
 

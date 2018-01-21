@@ -1,8 +1,6 @@
 import * as Api from '../utils/api'
 import { UpdatePostCommentCount } from './post'
-
-export const [ADD_COMMENT, EDIT_COMMENT, REMOVE_COMMENT, SET_COMMENTS, VOTE_COMMENT]
-    = ['ADD_COMMENT', 'EDIT_COMMENT', 'REMOVE_COMMENT', 'SET_COMMENTS', 'VOTE_COMMENT'];
+import { ADD_COMMENT, EDIT_COMMENT, REMOVE_COMMENT, SET_COMMENTS, VOTE_COMMENT } from './actionTypes'
 
 const AddCommentAction = (comment) => {
     return {

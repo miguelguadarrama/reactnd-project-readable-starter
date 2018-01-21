@@ -15,9 +15,16 @@ class Navbar extends Component {
                 <ul className="list">
                     <li>CATEGORIES</li>
                     <li><Link className={current === '' ? 'active':''} to="/">ALL</Link></li>
-                    {categories && categories.map(c => (
-                        <li key={c.name}><Link className={current === c.name ? 'active':''} to={`/${c.path}`}>{c.name}</Link></li>
-                    ))}
+                    {categories && categories.map(c => {
+                        const { name, path } = c;
+                        return (
+                            <li key={name}>
+                                <Link className={current === name ? 'active':''} to={`/${path}`}>
+                                    {name}
+                                </Link>
+                            </li>
+                        )
+                    })}
                 </ul>
             </nav>
         )

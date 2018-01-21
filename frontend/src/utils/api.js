@@ -1,20 +1,23 @@
-import pushid from 'pushid'
-
 const url = `http://localhost:3001`
 
-const auth = pushid()
+let token = localStorage.token
+if (!token)
+  token = localStorage.token = Math.random().toString(36).substr(-8)
+
+const headers = {
+  'Accept': 'application/json',
+  'Authorization': token
+}
 
 export const getCategories = () =>
-    fetch(`${url}/categories`, { headers: { Authorization: auth } })
+    fetch(`${url}/categories`, { headers: headers })
         .catch(err => { console.error(err); return [] })
         .then(res => res.json())
         .then(data => data.categories)
 
 export const getComments = (id) =>
     fetch(`${url}/posts/${id}/comments`, {
-        headers: {
-            Authorization: auth
-        }
+        headers: headers
     }).catch(err => console.error(err))
         .then(res => res.json())
         .then(data => data)
@@ -22,9 +25,7 @@ export const getComments = (id) =>
 export const deletePost = (id) =>
     fetch(`${url}/posts/${id}`, {
         method: 'DELETE',
-        headers: {
-            Authorization: auth
-        }
+        headers: headers
     }).catch(err => console.error(err))
         .then(res => res.json())
         .then(data => data)
@@ -32,9 +33,7 @@ export const deletePost = (id) =>
 export const deleteComment = (id) =>
     fetch(`${url}/comments/${id}`, {
         method: 'DELETE',
-        headers: {
-            Authorization: auth
-        }
+        headers: headers
     }).catch(err => console.error(err))
         .then(res => res.json())
         .then(data => data)
@@ -43,7 +42,7 @@ export const editPost = (post) =>
     fetch(`${url}/posts/${post.id}`, {
         method: 'PUT',
         headers: {
-            Authorization: auth,
+            ...headers,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(post)
@@ -55,7 +54,7 @@ export const editComment = (comment) =>
     fetch(`${url}/comments/${comment.id}`, {
         method: 'PUT',
         headers: {
-            Authorization: auth,
+            ...headers,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(comment)
@@ -64,7 +63,7 @@ export const editComment = (comment) =>
         .then(data => data)
 
 export const getPosts = () =>
-    fetch(`${url}/posts`, { headers: { Authorization: auth } })
+    fetch(`${url}/posts`, { headers: headers })
         .catch(err => { console.error(err); return [] })
         .then(res => res.json())
         .then(data => data)
@@ -73,7 +72,7 @@ export const addPost = (post) =>
     fetch(`${url}/posts`, {
         method: 'POST',
         headers: {
-            Authorization: auth,
+            ...headers,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(post)
@@ -85,7 +84,7 @@ export const addComment = (comment) =>
     fetch(`${url}/comments`, {
         method: 'POST',
         headers: {
-            Authorization: auth,
+            ...headers,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(comment)
@@ -97,7 +96,7 @@ export const submitVote = (id, value) =>
     fetch(`${url}/posts/${id}`, {
         method: 'POST',
         headers: {
-            Authorization: auth,
+            ...headers,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -111,7 +110,7 @@ export const submitCommentVote = (id, value) =>
     fetch(`${url}/comments/${id}`, {
         method: 'POST',
         headers: {
-            Authorization: auth,
+            ...headers,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -123,9 +122,7 @@ export const submitCommentVote = (id, value) =>
 
 export const getPost = (id) =>
     fetch(`${url}/posts/${id}`, {
-        headers: {
-            Authorization: auth
-        }
+        headers: headers
     }).catch(err => console.error(err))
         .then(res => res.json())
         .then(data => data)

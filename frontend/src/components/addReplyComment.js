@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import pushid from 'pushid'
+import { uuidv4 } from '../utils/helpers'
 import { addComment } from '../actions/comment'
 import { connect } from 'react-redux'
 
@@ -16,7 +16,7 @@ class AddReplyComponent extends Component {
     }
     submit = () => {
         const comment = {
-            id: pushid(),
+            id: uuidv4(),
             parentId: this.props.comment.parentId,
             parentPostId: this.props.comment.id,
             timestamp: Date.now(),
@@ -49,12 +49,6 @@ class AddReplyComponent extends Component {
     }
 }
 
-const mapStateToProps = () => {
-    return {
-
-    }
-}
-
 const mapDispatchToProps = (dispatch) => {
     return {
         addComment: (comment) => addComment(comment)(dispatch)
@@ -62,6 +56,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(AddReplyComponent)

@@ -1,6 +1,5 @@
 import * as Api from '../utils/api'
-export const [SET_POSTS, SET_POST, ADD_POST, EDIT_POST, REMOVE_POST, VOTE, SORT_BY, UPDATE_POST_COMMENT_COUNT]
-    = ['SET_POSTS', 'SET_POST', 'ADD_POST', 'EDIT_POST', 'REMOVE_POST', 'VOTE', 'SORT_BY', 'UPDATE_POST_COMMENT_COUNT']
+import { SET_POSTS, SET_POST, ADD_POST, EDIT_POST, REMOVE_POST, VOTE, SORT_BY, UPDATE_POST_COMMENT_COUNT } from './actionTypes'
 
 
 const AddPost = (post) => {
